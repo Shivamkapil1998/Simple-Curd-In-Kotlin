@@ -15,17 +15,16 @@ class DatabaseModule {
 
     @Singleton
     @Provides
+    @Named("first")
     fun provideMongoClient(
-        @Named(MONGODB_HOST) host : String
-    ) : MongoClient {
-        return MongoClient(host, MONGODB_PORT)
+        @Named(MONGODB_HOST) host: String,
+        @Named(MONGODB_PORT) port: Int
+    ): MongoClient {
+        return MongoClient(host, port)
     }
 
     @Provides
-    fun provideDatabase
-                (mongoClient: MongoClient
-
-    ) : MongoDatabase{
+    fun provideDatabase(@Named("first") mongoClient: MongoClient): MongoDatabase {
         return mongoClient.getDatabase("CrudApp")
     }
 

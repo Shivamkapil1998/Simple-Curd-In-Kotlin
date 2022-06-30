@@ -1,6 +1,7 @@
 package com.fretron.simpleCrudApp.di
 
 import com.fretron.MONGODB_HOST
+import com.fretron.MONGODB_PORT
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -14,9 +15,9 @@ class ConfigModule {
         return MONGODB_HOST
     }
 
-//    @Provides
-//    @Named(MONGODB_PORT)
-//    fun provideAppPort() : Int{
-//        return MONGODB_PORT
-//    }
+    @Provides
+    @Named(MONGODB_PORT)
+    fun provideAppPort() : Int{
+        return MONGODB_PORT.toInt()
+    }
 }

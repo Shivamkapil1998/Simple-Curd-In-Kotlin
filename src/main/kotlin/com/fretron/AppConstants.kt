@@ -7,6 +7,6 @@ package com.fretron
 //
 
 const val MONGODB_HOST  ="localhost"
-const val MONGODB_PORT  = 27017
+const val MONGODB_PORT  = "27017"
 //const val APPSERVER_HOST = "appServerHost"
 //const val APPSERVER_PORT = "appServerPort"
