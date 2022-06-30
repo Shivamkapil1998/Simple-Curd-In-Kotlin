@@ -2,9 +2,9 @@ package com.fretron.simpleCrudApp.services
 
 import com.fretron.simpleCrudApp.model.Teacher
 import com.fretron.simpleCrudApp.repository.TeacherRepository
-import javax.inject.Inject
 
-class TeacherService @Inject constructor(private val teacherRepository : TeacherRepository) {
+class TeacherService {
+    private val teacherRepository : TeacherRepository = TeacherRepository()
 
     fun addTeacher(teacher: Teacher) : Teacher{
         if(teacher.name == null || teacher.email == null){

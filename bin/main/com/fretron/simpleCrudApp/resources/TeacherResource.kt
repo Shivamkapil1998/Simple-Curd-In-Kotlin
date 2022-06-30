@@ -1,35 +1,35 @@
 package com.fretron.simpleCrudApp.resources
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fretron.simpleCrudApp.model.Student
-import com.fretron.simpleCrudApp.services.StudentService
+import com.fretron.simpleCrudApp.model.Teacher
+import com.fretron.simpleCrudApp.services.TeacherService
 import org.json.JSONObject
-import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
-@Path("/student")
+@Path("/teacher")
+class TeacherResource {
 
-class StudentResource @Inject constructor(private val studentService : StudentService) {
-    private val objectMapper = ObjectMapper()
+    private  val objectMapper : ObjectMapper = ObjectMapper()
+    private val teacherService : TeacherService = TeacherService()
+
     @POST
     @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    fun addStudent(request : String) : Response{
-        println("Request: $request")
-        val student = studentService.addUser(objectMapper.readValue(request,Student::class.java))
-        return Response.ok(student.toString()).build()
+    fun addTeacher(request : String) : Response{
+        val teacher = teacherService.addTeacher(objectMapper.readValue(request,Teacher::class.java))
+        return Response.ok(teacher.toString()).build()
     }
 
     @GET
     @Path("/find")
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    fun getStudent(@QueryParam("name") name : String) : Response{
-        val student =  studentService.getStudent(name)
-        return Response.ok(student.toString()).build()
+    @Produces(MediaType.APPLICATION_JSON)
+    fun getTeacher(@QueryParam("name") name : String) : Response{
+        val teacher = teacherService.getTeacher(name)
+        return Response.ok(teacher.toString()).build()
     }
 
     @PUT
@@ -37,14 +37,14 @@ class StudentResource @Inject constructor(private val studentService : StudentSe
     @Consumes(MediaType.APPLICATION_JSON)
     fun updateEmail(@QueryParam("name") name : String,request: String) : Response{
         val email:String = JSONObject(request).getString("email")
-        studentService.updateEmail(name,email)
+        teacherService.updateEmail(name,email)
         return Response.ok("DONE").build()
     }
 
     @DELETE
     @Path("/delete")
     fun deleteTeacher(@QueryParam("name") name: String) : Response{
-        studentService.deleteStudent(name)
+        teacherService.deleteTeacher(name)
         return Response.ok("DONE").build()
     }
 }

@@ -1,14 +1,37 @@
 package com.fretron
 
-import com.fretron.simpleCrudApp.resources.StudentResource
-import com.fretron.simpleCrudApp.resources.TeacherResource
+import com.fretron.simpleCrudApp.di.AppComponent
+import com.fretron.simpleCrudApp.di.ConfigModule
+import com.fretron.simpleCrudApp.di.DaggerAppComponent
 import org.glassfish.grizzly.http.server.HttpServer
-import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory
-import org.glassfish.jersey.server.ResourceConfig
-import javax.ws.rs.core.UriBuilder
 
 fun main(args : Array<String>){
-    val uri   = UriBuilder.fromUri("http://localhost/").port(8084).build()
-    val config: ResourceConfig = ResourceConfig(StudentResource::class.java,TeacherResource::class.java)
-    val server : HttpServer = GrizzlyHttpServerFactory.createHttpServer(uri,config)
+    val configModule = ConfigModule()
+    val component : AppComponent = DaggerAppComponent.create()
+    val server : HttpServer = component.server()
+    server.start()
 }
+
+
+/**
+ * val device = JSONObject()
+val type = if(device.has("type")) device.getString("type") else null
+if(type == "INVENTORY"){
+val usedBy : String? = if(device.has("usedBy")) device.getString("usedBy") else null
+println(usedBy)
+val usedByArr = arrayOf("VENDOR","CUSTOMER","IN_TRANSIT")
+if(usedBy in usedByArr || usedBy == null) {
+when (usedBy) {
+"IN_TRANSIT" -> println("inTransit")
+"CUSTOMER" -> println("customer")
+"VENDOR" -> println("vendor")
+else -> println("available")
+}
+}
+}else{
+println("type : $type")
+val usedBy : String? = if(device.has("usedBy")) device.getString("usedBy") else null
+println("usedBy : $usedBy")
+}
+ */
+

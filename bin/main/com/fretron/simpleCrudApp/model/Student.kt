@@ -3,7 +3,13 @@ package com.fretron.simpleCrudApp.model
 import org.json.JSONObject
 
 
-data class Student constructor(var rollNo : String?=null,var name : String?=null,var age : Int?=null,var email : String?=null) {
+class Student() {
+    var rollNo : String? = null
+    var name : String? = null
+    var age : Int? = null
+    var email : String? = null
+
+
     override fun toString(): String {
         return JSONObject()
             .put("rollNo",this.rollNo)

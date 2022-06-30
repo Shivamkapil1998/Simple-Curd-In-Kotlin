@@ -3,16 +3,14 @@ package com.fretron.simpleCrudApp.repository
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fretron.simpleCrudApp.model.Teacher
 import com.mongodb.client.MongoCollection
-import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Filters
 import com.mongodb.client.model.Updates
 import com.mongodb.util.JSON
 import org.bson.Document
-import javax.inject.Inject
 
-class TeacherRepository @Inject constructor(database: MongoDatabase) {
+class TeacherRepository {
     private val objectMapper  = ObjectMapper()
-    private val collection : MongoCollection<Document> = database.getCollection("teacher")
+    private val collection : MongoCollection<Document> = MongoClient.database.getCollection("teacher")
 
     fun addTeacher(teacher: Teacher) : Teacher{
         println(teacher)

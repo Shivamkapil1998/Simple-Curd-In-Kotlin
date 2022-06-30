@@ -2,10 +2,8 @@ package com.fretron.simpleCrudApp.services
 
 import com.fretron.simpleCrudApp.model.Student
 import com.fretron.simpleCrudApp.repository.StudentRepository
-import javax.inject.Inject
-
-class StudentService @Inject constructor(private  val studentRepository : StudentRepository) {
-
+class StudentService {
+    private  val studentRepository = StudentRepository()
     fun addUser(student: Student): Student {
         if(student.name== null || student.email ==null){
             throw NullPointerException("Student's name or email is null")

@@ -4,15 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fretron.simpleCrudApp.model.Teacher
 import com.fretron.simpleCrudApp.services.TeacherService
 import org.json.JSONObject
+import javax.inject.Inject
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
 @Path("/teacher")
-class TeacherResource {
+class TeacherResource @Inject constructor(private val teacherService : TeacherService) {
 
     private  val objectMapper : ObjectMapper = ObjectMapper()
-    private val teacherService : TeacherService = TeacherService()
+
 
     @POST
     @Path("/register")
